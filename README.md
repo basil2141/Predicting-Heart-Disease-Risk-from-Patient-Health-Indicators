@@ -1,115 +1,134 @@
 Heart Disease Risk Prediction
-A machine learning project to predict heart disease risk using patient health indicators.
+Project Overview
 
-Dataset
-Source: Heart Disease Data on Kaggle
+This project develops an end-to-end machine learning pipeline for predicting the presence of heart disease using patient clinical measurements. The objective is to build a reliable classification model while following a structured data science workflow that emphasizes data quality assessment, statistical analysis, feature engineering, model evaluation, and interpretability.
 
-Target Variable: Heart disease presence (binary classification)
+Dataset: Heart Disease Dataset (Kaggle)
 
-Project Structure
-1. Data Profiling & Initial Analysis
-Data loading and basic exploration
+Problem Type: Multi-class Classification
 
-Row/column counts and data types
+Data Quality Assessment
 
-Missing value analysis and duplicate detection
+Before training any model, the dataset was thoroughly examined for data quality issues.
 
-Distribution visualization and outlier detection
+Duplicate Analysis
+No duplicate records were found in the dataset.
+Missing Value Analysis
 
-Correlation analysis (Pearson for numerical, Cramér's V for categorical)
+The dataset contained significant missing values, especially in the following features:
 
-2. Exploratory Data Analysis (EDA)
-Pass A: Raw EDA
+Feature	Missing Values
+ca	611
+thal	486
+slope	309
+fbs	90
+oldpeak	62
+trestbps	59
+thalch	55
+exang	55
+chol	30
+restecg	2
 
-Distribution plots (histograms, countplots)
+A missing-value heatmap was generated to visualize missingness patterns. The feature ca contained the largest proportion of missing values, followed by thal and slope.
 
-Missing value patterns visualization
+Exploratory Data Analysis
 
-Class imbalance analysis
+Exploratory analysis was performed to understand the characteristics of the dataset before preprocessing.
 
-Correlation analysis on complete cases
+Outlier Detection
 
-Pass B: Post-Imputation EDA
+Boxplots were used to identify potential outliers.
 
-Missing value imputation (mean/median for numerical, mode for categorical)
+Key observations included:
 
-Categorical variable encoding
+trestbps: invalid value of 0 and unusually high blood pressure values.
+chol: invalid value of 0 and several extremely high cholesterol values (>400).
+thalch: unusually low heart rate values.
+oldpeak: impossible negative values (<0).
 
-Statistical testing:
+These observations guided subsequent preprocessing decisions.
 
-Chi-square tests (categorical vs target)
+Class Distribution
 
-ANOVA/Kruskal-Wallis (numerical vs target)
+The distribution of heart disease severity classes was analyzed to understand class imbalance.
 
-Effect size metrics (Cohen's d, η²)
+Additional exploratory analysis included:
 
-3. Feature Engineering & Statistical Testing
-3.1 Outlier Handling
+Target class distribution
+Gender distribution
+Numerical feature distributions
+Correlation analysis between clinical variables
+Data Preprocessing
 
-IQR/z-score methods for numerical features
+The preprocessing pipeline was implemented using Scikit-Learn's Pipeline and ColumnTransformer.
 
-Domain-specific outlier treatment:
+Outlier Treatment
+Replaced invalid blood pressure values (trestbps = 0) with missing values.
+Clipped impossible oldpeak values to a valid clinical range.
+Missing Value Imputation
 
-chol = 600: Winsorize/log-transform (possible true extreme)
+Numerical features:
 
-oldpeak = -3: Replace with NaN (impossible value)
+Mean imputation
 
-3.2 Missing Value Imputation
+Categorical features:
 
-Numerical: Mean/median/regression imputation
+Most frequent category imputation
+Feature Transformation
 
-Categorical: Mode/"missing" category
+Numerical features:
 
-3.3 Feature Transformation
+StandardScaler
 
-Scaling: StandardScaler, MinMaxScaler, RobustScaler
+Categorical features:
 
-Encoding: One-hot, ordinal, or target encoding
+One-Hot Encoding (drop='first')
 
-3.4 Feature Creation
+The entire preprocessing workflow was encapsulated in reusable pipelines to prevent data leakage.
 
-Domain-driven combinations (BMI, age groups, ratios)
+Machine Learning Models
 
-Polynomial and interaction terms
-
-3.5 Statistical Feature Selection
-
-ANOVA/Kruskal-Wallis for numerical vs target
-
-Chi-square/Cramer's V for categorical vs target
-
-Pearson/Spearman correlation for numerical relationships
-
-3.6 Multicollinearity Check
-
-Variance Inflation Factor (VIF) analysis
-
-PCA for correlated features
-
-3.7 Model-based Feature Importance
-
-Logistic Regression coefficients
-
-Random Forest/Gradient Boosting importance
-
-SHAP values for interpretability
-
-Model Preparation
-Train-test split (80/20 or 70/30)
-
-Feature scaling (fit on training data only)
-
-Baseline models:
+The following classification models were trained and compared:
 
 Logistic Regression
-
+Decision Tree
 Random Forest
+XGBoost
+Model Performance
+Model	Accuracy	Precision	Recall	F1 Score
+XGBoost	61.96%	58.84%	61.96%	59.79%
+Random Forest	59.24%	55.31%	59.24%	56.84%
+Decision Tree	55.98%	48.82%	55.98%	51.23%
+Logistic Regression	54.89%	48.41%	54.89%	50.59%
 
-Gradient Boosted Trees (XGBoost/LightGBM)
+Among all evaluated models, XGBoost achieved the best overall performance.
 
-Evaluation Metrics
-Accuracy, Precision, Recall, F1-score
+Additional Analysis
 
-ROC-AUC and ROC curves
+The project also includes:
 
 Feature importance analysis
+Correlation analysis
+Missing value visualization
+Outlier visualization
+Feature preprocessing pipelines
+Model comparison using multiple evaluation metrics
+Technologies Used
+Python
+NumPy
+Pandas
+Matplotlib
+Scikit-Learn
+XGBoost
+Key Learnings
+
+This project demonstrates an end-to-end data science workflow, including:
+
+Data quality assessment
+Missing value analysis
+Outlier handling
+Exploratory Data Analysis (EDA)
+Feature preprocessing using Scikit-Learn Pipelines
+Machine learning model comparison
+Performance evaluation using Accuracy, Precision, Recall, and F1-score
+Building reproducible preprocessing and training pipelines
