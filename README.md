@@ -103,6 +103,13 @@ Model Performance
 | Decision Tree | 0.5598 | 0.4882 | 0.5598 | 0.5123 |
 | Logistic Regression | 0.5489 | 0.4841 | 0.5489 | 0.5059 |
  
+After changing the problem to binary classification results changed to: 
+| Model | Accuracy | Precision | Recall | F1-Score |
+|-------|---------:|----------:|-------:|---------:|
+| Logistic Regression | 0.8043 | 0.8476 | 0.8165 | 0.8318 |
+| Decision Tree | 0.8370 | 0.8559 | 0.8716 | 0.8636 |
+| Random Forest | **0.8696** | **0.9048** | 0.8716 | 0.8879 |
+| XGBoost | **0.8696** | 0.8972 | **0.8807** | **0.8889** |
 
 Among all evaluated models, XGBoost achieved the best overall performance.
 
