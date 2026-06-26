@@ -111,7 +111,7 @@ After changing the problem to binary classification results changed to:
 | Random Forest | **0.8696** | **0.9048** | 0.8716 | 0.8879 |
 | XGBoost | **0.8696** | 0.8972 | **0.8807** | **0.8889** |
 
-Among all evaluated models, XGBoost achieved the best overall performance.
+Among all evaluated models, XGBoost and Random Forest achieved the best overall performance.
 
 Additional Analysis
 
