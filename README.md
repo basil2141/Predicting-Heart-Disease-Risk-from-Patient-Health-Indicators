@@ -95,11 +95,13 @@ Decision Tree
 Random Forest
 XGBoost
 Model Performance
-Model	Accuracy	Precision	Recall	F1 Score
-XGBoost	61.96%	58.84%	61.96%	59.79%
-Random Forest	59.24%	55.31%	59.24%	56.84%
-Decision Tree	55.98%	48.82%	55.98%	51.23%
-Logistic Regression	54.89%	48.41%	54.89%	50.59%
+
+Model        	      Accuracy	Precision	Recall	F1
+XGBoost  	          0.619565	0.588445	0.619565	0.597850
+Random Forest	      0.592391	0.553136	0.592391	0.568441
+Decision Tree	      0.559783	0.488248	0.559783	0.512303
+Logistic Regression	0.548913	0.484109	0.548913	0.505866
+ 
 
 Among all evaluated models, XGBoost achieved the best overall performance.
 
